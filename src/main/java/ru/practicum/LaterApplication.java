@@ -17,8 +17,8 @@ public class LaterApplication {
         Context tomcatContext = tomcat.addContext("", null);
         AnnotationConfigWebApplicationContext applicationContext =
                 new AnnotationConfigWebApplicationContext();
-        applicationContext.setServletContext(tomcatContext.getServletContext());
         applicationContext.scan("ru.practicum");
+        applicationContext.setServletContext(tomcatContext.getServletContext());
         applicationContext.refresh();
 
         DispatcherServlet dispatcherServlet = new DispatcherServlet(applicationContext);

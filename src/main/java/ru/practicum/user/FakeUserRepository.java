@@ -1,9 +1,12 @@
 package ru.practicum.user;
 
+import org.springframework.stereotype.Repository;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+@Repository
 public class FakeUserRepository implements UserRepository{
     private static final List<User> FAKE_USERS = createManyFakeUsers(3);
 
