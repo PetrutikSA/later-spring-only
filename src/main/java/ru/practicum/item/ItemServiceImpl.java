@@ -9,6 +9,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ItemServiceImpl  implements ItemService{
     private final ItemRepository itemRepository;
+    private final ItemNotesRepository itemNotesRepository;
 
     @Override
     public List<Item> getAllItems(long userId) {
