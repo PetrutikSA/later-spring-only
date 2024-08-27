@@ -1,7 +1,6 @@
 package ru.practicum.item;
 
 import lombok.RequiredArgsConstructor;
-import note.ItemNotesRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

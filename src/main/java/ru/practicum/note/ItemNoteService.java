@@ -1,4 +1,4 @@
-package note;
+package ru.practicum.note;
 
 import org.springframework.transaction.annotation.Transactional;
 

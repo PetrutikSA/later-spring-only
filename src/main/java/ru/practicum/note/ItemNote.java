@@ -1,4 +1,4 @@
-package note;
+package ru.practicum.note;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;

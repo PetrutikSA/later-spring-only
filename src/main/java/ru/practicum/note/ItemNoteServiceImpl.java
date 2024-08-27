@@ -1,4 +1,4 @@
-package note;
+package ru.practicum.note;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
