@@ -1,6 +1,7 @@
 package ru.practicum.item;
 
 import lombok.RequiredArgsConstructor;
+import note.ItemNotesRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,7 +10,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ItemServiceImpl  implements ItemService{
     private final ItemRepository itemRepository;
-    private final ItemNotesRepository itemNotesRepository;
 
     @Override
     public List<Item> getAllItems(long userId) {
