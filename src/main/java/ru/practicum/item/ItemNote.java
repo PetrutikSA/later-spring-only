@@ -1,5 +1,6 @@
 package ru.practicum.item;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -15,6 +16,7 @@ import java.time.Instant;
 @Getter
 @Setter
 @RequiredArgsConstructor
+@Entity
 @Table(name = "item_notes")
 public class ItemNote {
     @Id

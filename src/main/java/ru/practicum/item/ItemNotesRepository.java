@@ -12,9 +12,9 @@ public interface ItemNotesRepository extends JpaRepository<ItemNote, Long> {
 
     @Query("""
             select notes
-            from ItemNotes as notes
+            from ItemNote as notes
             join notes.item as i
-            where i.user_id = ?1 and ?2 member of i.tags
+            where i.userId = ?1 and ?2 member of i.tags
             """)
     List<ItemNote> findItemNotesByUserIdAndTag (Long userId, String tag);
 }
