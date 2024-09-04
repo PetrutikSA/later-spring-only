@@ -12,6 +12,7 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -30,4 +31,14 @@ public class Item {
     @CollectionTable(name="tags", joinColumns=@JoinColumn(name="item_id"))
     @Column(name="name")
     private Set<String> tags = new HashSet<>();
+    @Column(name="resolved_url")
+    private String resolvedUrl;
+    private String title;
+    private String mimeType;
+    @Column(name="has_image")
+    private boolean hasImage;
+    @Column(name="has_video")
+    private boolean hasVideo;
+    @Column(name="date_resolved")
+    private Instant dateResolved;
 }

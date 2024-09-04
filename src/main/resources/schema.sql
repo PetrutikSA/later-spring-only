@@ -8,7 +8,13 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS items (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     user_id BIGINT REFERENCES users(id),
-    url VARCHAR(256)
+    url VARCHAR(256),
+    resolved_url VARCHAR(256),
+    title VARCHAR(256),
+    mimeType VARCHAR(256),
+    has_image BOOLEAN,
+    has_video BOOLEAN,
+    date_resolved TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS tags (
