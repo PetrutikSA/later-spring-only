@@ -1,4 +1,4 @@
-package ru.practicum.item.model;
+package ru.practicum.item.model.enums;
 
 public enum ContentType {
     ALL,

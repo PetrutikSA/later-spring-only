@@ -42,4 +42,5 @@ public class Item {
     private boolean hasVideo;
     @Column(name="date_resolved")
     private Instant dateResolved;
+    private boolean unread = true;
 }

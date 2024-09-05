@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.practicum.item.dto.ItemCreateDto;
 import ru.practicum.item.dto.ItemDto;
-import ru.practicum.item.model.ContentType;
+import ru.practicum.item.model.enums.ContentType;
 import ru.practicum.item.model.GetItemRequest;
-import ru.practicum.item.model.ItemSort;
-import ru.practicum.item.model.ItemState;
+import ru.practicum.item.model.enums.ItemSort;
+import ru.practicum.item.model.enums.ItemState;
 
 import java.util.List;
 
@@ -25,7 +25,6 @@ import java.util.List;
 public class ItemController {
     private final ItemService itemService;
 
-    @GetMapping
     public List<ItemDto> getAllItems(@RequestHeader("X-Later-User-Id") long userId) {
         return itemService.getAllItems(userId);
     }
@@ -51,9 +50,9 @@ public class ItemController {
     ) {
         GetItemRequest getItemRequest = GetItemRequest.builder()
                 .userId(userId)
-                .state(ItemState.valueOf(state))
-                .contentType(ContentType.valueOf(contentType))
-                .sort(ItemSort.valueOf(sort))
+                .state(ItemState.valueOf(state.toUpperCase()))
+                .contentType(ContentType.valueOf(contentType.toUpperCase()))
+                .sort(ItemSort.valueOf(sort.toUpperCase()))
                 .limit(limit)
                 .tags(tags)
                 .build();

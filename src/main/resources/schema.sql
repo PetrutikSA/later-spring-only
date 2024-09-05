@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS items (
     title VARCHAR(256),
     mimeType VARCHAR(64),
     has_image BOOLEAN,
+    unread BOOLEAN,
     has_video BOOLEAN,
     date_resolved TIMESTAMP
 );

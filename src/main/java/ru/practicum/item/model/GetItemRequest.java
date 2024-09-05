@@ -2,6 +2,9 @@ package ru.practicum.item.model;
 
 import lombok.Builder;
 import lombok.Data;
+import ru.practicum.item.model.enums.ContentType;
+import ru.practicum.item.model.enums.ItemSort;
+import ru.practicum.item.model.enums.ItemState;
 
 import java.util.List;
 
