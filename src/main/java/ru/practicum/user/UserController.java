@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.practicum.user.dto.UserCreateDto;
+import ru.practicum.user.dto.UserDto;
 
 import java.util.List;
 
@@ -16,12 +18,12 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public List<User> getAllUsers() {
+    public List<UserDto> getAllUsers() {
         return userService.getAllUsers();
     }
 
     @PostMapping
-    public User saveNewUser(@RequestBody User user) {
-        return userService.saveUser(user);
+    public UserDto saveNewUser(@RequestBody UserCreateDto userCreateDto) {
+        return userService.saveUser(userCreateDto);
     }
 }

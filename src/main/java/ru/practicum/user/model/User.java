@@ -1,4 +1,4 @@
-package ru.practicum.user;
+package ru.practicum.user.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import ru.practicum.user.UserState;
 
 @Entity
 @Table(name = "users")

@@ -7,11 +7,11 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.exception.InsufficientPermissionException;
 import ru.practicum.item.dto.ItemCreateDto;
 import ru.practicum.item.dto.ItemDto;
-import ru.practicum.item.mapper.ItemMapper;
+import ru.practicum.item.dto.mapper.ItemMapper;
 import ru.practicum.item.metadata.UrlMetadata;
 import ru.practicum.item.metadata.UrlMetadataRetrieverImpl;
 import ru.practicum.item.model.Item;
-import ru.practicum.user.User;
+import ru.practicum.user.model.User;
 import ru.practicum.user.UserRepository;
 
 import java.util.List;

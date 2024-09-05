@@ -1,4 +1,4 @@
-package ru.practicum.item.mapper;
+package ru.practicum.item.dto.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

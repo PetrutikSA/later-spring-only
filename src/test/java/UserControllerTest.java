@@ -7,7 +7,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import ru.practicum.user.User;
+import ru.practicum.user.dto.UserCreateDto;
+import ru.practicum.user.dto.UserDto;
+import ru.practicum.user.model.User;
 import ru.practicum.user.UserController;
 import ru.practicum.user.UserService;
 import ru.practicum.user.UserState;
@@ -36,13 +38,13 @@ public class UserControllerTest {
 
     private MockMvc mvc;
 
-    private User user;
+    private UserDto user;
 
     @BeforeEach
     void setUp() {
         mvc = MockMvcBuilders.standaloneSetup(userController).build();
 
-        user = new User();
+        user = new UserDto();
         user.setName("Name");
         user.setEmail("email@ya.ru");
         user.setId(1L);
