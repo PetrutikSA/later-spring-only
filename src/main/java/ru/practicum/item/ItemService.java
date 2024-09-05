@@ -1,5 +1,7 @@
 package ru.practicum.item;
 
+import ru.practicum.item.model.Item;
+
 import java.util.List;
 
 public interface ItemService {

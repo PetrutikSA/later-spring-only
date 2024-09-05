@@ -1,4 +1,4 @@
-package ru.practicum.item;
+package ru.practicum.item.model;
 
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;

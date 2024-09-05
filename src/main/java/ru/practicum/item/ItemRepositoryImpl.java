@@ -2,6 +2,7 @@ package ru.practicum.item;
 
 import org.springframework.stereotype.Repository;
 import ru.practicum.exception.NotFoundException;
+import ru.practicum.item.model.Item;
 
 import java.util.HashMap;
 import java.util.List;

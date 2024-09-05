@@ -12,7 +12,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import ru.practicum.item.Item;
+import ru.practicum.item.model.Item;
 
 import java.time.Instant;
 

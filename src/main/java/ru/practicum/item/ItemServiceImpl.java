@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.practicum.item.metadata.UrlMetadata;
 import ru.practicum.item.metadata.UrlMetadataRetrieverImpl;
+import ru.practicum.item.model.Item;
 
 import java.util.List;
 import java.util.Optional;
