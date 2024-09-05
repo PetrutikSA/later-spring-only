@@ -10,6 +10,7 @@ import ru.practicum.item.dto.ItemDto;
 import ru.practicum.item.dto.mapper.ItemMapper;
 import ru.practicum.item.metadata.UrlMetadata;
 import ru.practicum.item.metadata.UrlMetadataRetrieverImpl;
+import ru.practicum.item.model.GetItemRequest;
 import ru.practicum.item.model.Item;
 import ru.practicum.user.model.User;
 import ru.practicum.user.UserRepository;
@@ -63,5 +64,10 @@ public class ItemServiceImpl  implements ItemService{
     @Override
     public void deleteItem(long userId, long itemId) {
         itemRepository.deleteByUserIdAndId(userId, itemId);
+    }
+
+    @Override
+    public List<ItemDto> getItems(GetItemRequest req) {
+        return null;
     }
 }

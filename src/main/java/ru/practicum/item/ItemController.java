@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.practicum.item.dto.ItemCreateDto;
 import ru.practicum.item.dto.ItemDto;
+import ru.practicum.item.model.ContentType;
+import ru.practicum.item.model.GetItemRequest;
+import ru.practicum.item.model.ItemSort;
+import ru.practicum.item.model.ItemState;
 
 import java.util.List;
 
@@ -45,6 +49,14 @@ public class ItemController {
             @RequestParam(name = "limit", defaultValue = "10") int limit,
             @RequestParam(name = "tags", required = false) List<String> tags
     ) {
-        return null;
+        GetItemRequest getItemRequest = GetItemRequest.builder()
+                .userId(userId)
+                .state(ItemState.valueOf(state))
+                .contentType(ContentType.valueOf(contentType))
+                .sort(ItemSort.valueOf(sort))
+                .limit(limit)
+                .tags(tags)
+                .build();
+        return itemService.getItems(getItemRequest);
     }
 }
