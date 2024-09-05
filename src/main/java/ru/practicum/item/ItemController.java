@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.practicum.item.dto.ItemCreateDto;
 import ru.practicum.item.dto.ItemDto;
+import ru.practicum.item.dto.ItemUpdateDto;
 import ru.practicum.item.model.enums.ContentType;
 import ru.practicum.item.model.GetItemRequest;
 import ru.practicum.item.model.enums.ItemSort;
@@ -61,7 +62,7 @@ public class ItemController {
     }
 
     @PatchMapping
-    public ItemDto updateItem(@RequestHeader("X-Later-User-Id") long userId, @RequestBody ItemCreateDto itemCreateDto) {
-        return null;
+    public ItemDto updateItem(@RequestHeader("X-Later-User-Id") long userId, @RequestBody ItemUpdateDto itemUpdateDto) {
+        return itemService.updateItem(userId, itemUpdateDto);
     }
 }

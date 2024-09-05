@@ -23,7 +23,7 @@ public interface ItemMapper {
     Item fillWithMetaData(UrlMetadata urlMetadata, @MappingTarget Item item);
 
     @Mapping(target = "tags", expression = "java(mapTags(itemUpdateDto, item))")
-    @Mapping(target = "unread", source = "java(!itemUpdateDto.isRead())")
+    @Mapping(target = "unread", expression = "java(!itemUpdateDto.isRead())")
     Item updateItem(ItemUpdateDto itemUpdateDto, @MappingTarget Item item);
 
     default Set<String> mapTags(ItemUpdateDto itemUpdateDto, @MappingTarget Item item) {

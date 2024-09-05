@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.exception.InsufficientPermissionException;
+import ru.practicum.exception.NotFoundException;
 import ru.practicum.item.dto.ItemCreateDto;
 import ru.practicum.item.dto.ItemDto;
+import ru.practicum.item.dto.ItemUpdateDto;
 import ru.practicum.item.dto.mapper.ItemMapper;
 import ru.practicum.item.metadata.UrlMetadata;
 import ru.practicum.item.metadata.UrlMetadataRetrieverImpl;
@@ -46,8 +48,7 @@ public class ItemServiceImpl  implements ItemService{
     @Transactional
     @Override
     public ItemDto saveNewItem(long userId, ItemCreateDto itemCreateDto) {
-        User user = userRepository.findById(userId).orElseThrow(()
-                -> new InsufficientPermissionException("You do not have permission to perform this operation"));
+        User user = getUserFromRepository(userId);
 
         Item item = itemMapper.itemCreateDtoToItem(itemCreateDto);
         item.setUserId(userId);
@@ -131,5 +132,23 @@ public class ItemServiceImpl  implements ItemService{
             case OLDEST -> Sort.by("dateResolved").ascending();
             default -> Sort.by("dateResolved").descending();
         };
+    }
+
+    @Override
+    public ItemDto updateItem(long userId, ItemUpdateDto itemUpdateDto) {
+        User user = getUserFromRepository(userId);
+        Item itemDb = itemRepository.findById(itemUpdateDto.getId()).orElseThrow(()
+                -> new NotFoundException("The item with id " + itemUpdateDto.getId() + " was not found"));
+        if (itemDb.getUserId() != userId)
+            throw new InsufficientPermissionException("You do not have permission to perform this operation");
+
+        itemDb = itemMapper.updateItem(itemUpdateDto, itemDb);
+        itemDb = itemRepository.save(itemDb);
+        return itemMapper.itemToItemDto(itemDb);
+    }
+
+    private User getUserFromRepository(long userId) {
+        return userRepository.findById(userId).orElseThrow(()
+                -> new InsufficientPermissionException("You do not have permission to perform this operation"));
     }
 }
