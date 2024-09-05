@@ -21,7 +21,7 @@ public class ItemController {
     private final ItemService itemService;
 
     @GetMapping
-    public List<Item> getAllItems(@RequestHeader("X-Later-User-Id") long userId) {
+    public List<ItemDto> getAllItems(@RequestHeader("X-Later-User-Id") long userId) {
         return itemService.getAllItems(userId);
     }
 
