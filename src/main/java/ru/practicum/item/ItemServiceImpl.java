@@ -4,11 +4,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import ru.practicum.exception.InsufficientPermissionException;
+import ru.practicum.item.dto.ItemCreateDto;
 import ru.practicum.item.dto.ItemDto;
 import ru.practicum.item.mapper.ItemMapper;
 import ru.practicum.item.metadata.UrlMetadata;
 import ru.practicum.item.metadata.UrlMetadataRetrieverImpl;
 import ru.practicum.item.model.Item;
+import ru.practicum.user.User;
+import ru.practicum.user.UserRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +22,7 @@ import java.util.Optional;
 @Transactional(propagation= Propagation.REQUIRED, readOnly=true, noRollbackFor=Exception.class)
 public class ItemServiceImpl  implements ItemService{
     private final ItemRepository itemRepository;
+    private final UserRepository userRepository;
     private final UrlMetadataRetrieverImpl urlMetadataRetriever;
     private final ItemMapper itemMapper;
 
@@ -30,21 +35,19 @@ public class ItemServiceImpl  implements ItemService{
 
     @Transactional
     @Override
-    public Item saveNewItem(long userId, Item item) {
+    public ItemDto saveNewItem(long userId, ItemCreateDto itemCreateDto) {
+        User user = userRepository.findById(userId).orElseThrow(()
+                -> new InsufficientPermissionException("You do not have permission to perform this operation"));
+
+        Item item = itemMapper.itemCreateDtoToItem(itemCreateDto);
         item.setUserId(userId);
 
         UrlMetadata urlMetadata = urlMetadataRetriever.retrieve(item.getUrl());
-
         Optional<Item> maybeExistingItem =
                 itemRepository.findByUserIdAndResolvedUrl(userId, urlMetadata.getResolvedUrl());
 
         if (maybeExistingItem.isEmpty()) {
-            item.setTitle(urlMetadata.getTitle());
-            item.setResolvedUrl(urlMetadata.getResolvedUrl());
-            item.setMimeType(urlMetadata.getMimeType());
-            item.setHasImage(urlMetadata.isHasImage());
-            item.setHasVideo(urlMetadata.isHasVideo());
-            item.setDateResolved(urlMetadata.getDateResolved());
+            item = itemMapper.fillWithMetaData(urlMetadata, item);
             item = itemRepository.save(item);
         } else {
             Item itemFromDB = maybeExistingItem.get();
@@ -53,7 +56,7 @@ public class ItemServiceImpl  implements ItemService{
                 item = itemRepository.save(itemFromDB);
             }
         }
-        return item;
+        return itemMapper.itemToItemDto(item);
     }
 
     @Transactional

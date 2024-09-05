@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.practicum.item.dto.ItemCreateDto;
 import ru.practicum.item.dto.ItemDto;
-import ru.practicum.item.model.Item;
 
 import java.util.List;
 
@@ -26,8 +26,8 @@ public class ItemController {
     }
 
     @PostMapping
-    public Item saveNewItem(@RequestHeader("X-Later-User-Id") long userId, @RequestBody Item item) {
-        return itemService.saveNewItem(userId, item);
+    public ItemDto saveNewItem(@RequestHeader("X-Later-User-Id") long userId, @RequestBody ItemCreateDto itemCreateDto) {
+        return itemService.saveNewItem(userId, itemCreateDto);
     }
 
     @DeleteMapping("/{itemId}")
