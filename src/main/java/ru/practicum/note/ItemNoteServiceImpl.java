@@ -6,7 +6,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ru.practicum.item.model.Item;
 import ru.practicum.item.ItemRepository;
+import ru.practicum.note.dto.ItemNoteCreateDto;
+import ru.practicum.note.dto.ItemNoteDto;
+import ru.practicum.note.dto.mapper.ItemNoteMapper;
+import ru.practicum.note.model.ItemNote;
 
+import java.time.Instant;
 import java.util.List;
 
 @Service
@@ -14,27 +19,37 @@ import java.util.List;
 public class ItemNoteServiceImpl implements ItemNoteService{
     private final ItemNotesRepository itemNotesRepository;
     private final ItemRepository itemRepository;
+    private final ItemNoteMapper itemNoteMapper;
 
     @Override
-    public ItemNote addNewItemNote(long userId, ItemNote itemNote) {
-        Item item = itemRepository.findById(itemNote.getItem().getId())
+    public ItemNoteDto addNewItemNote(long userId, ItemNoteCreateDto itemNoteCreateDto) {
+        Item item = itemRepository.findById(itemNoteCreateDto.getItemId())
                 .orElseThrow(() -> new RuntimeException("Item not found"));
-        return itemNotesRepository.save(itemNote);
+        ItemNote itemNote = itemNoteMapper.itemNoteCreateDtoToItemNote(itemNoteCreateDto, item);
+        itemNote.setCreated(Instant.now());
+        itemNote = itemNotesRepository.save(itemNote);
+        return itemNoteMapper.itemNoteToItemNoteDto(itemNote);
     }
 
     @Override
-    public List<ItemNote> searchNotesByUrl(String url, Long userId) {
-        return itemNotesRepository.findAllByItemUserIdAndItemUrlContainingIgnoreCase(userId, url);
+    public List<ItemNoteDto> searchNotesByUrl(String url, Long userId) {
+        return itemNotesRepository.findAllByItemUserIdAndItemUrlContainingIgnoreCase(userId, url).stream()
+                .map(itemNoteMapper::itemNoteToItemNoteDto)
+                .toList();
     }
 
     @Override
-    public List<ItemNote> searchNotesByTag(long userId, String tag) {
-        return itemNotesRepository.findItemNotesByUserIdAndTag(userId, tag);
+    public List<ItemNoteDto> searchNotesByTag(long userId, String tag) {
+        return itemNotesRepository.findItemNotesByUserIdAndTag(userId, tag).stream()
+                .map(itemNoteMapper::itemNoteToItemNoteDto)
+                .toList();
     }
 
     @Override
-    public List<ItemNote> listAllItemsWithNotes(long userId, int from, int size) {
+    public List<ItemNoteDto> listAllItemsWithNotes(long userId, int from, int size) {
         Pageable page = PageRequest.of(from > 0 ? from / size : 0, size);
-        return itemNotesRepository.findAllByItemUserId(userId, page).stream().toList();
+        return itemNotesRepository.findAllByItemUserId(userId, page).stream()
+                .map(itemNoteMapper::itemNoteToItemNoteDto)
+                .toList();
     }
 }

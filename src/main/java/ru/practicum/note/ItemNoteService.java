@@ -1,6 +1,8 @@
 package ru.practicum.note;
 
 import org.springframework.transaction.annotation.Transactional;
+import ru.practicum.note.dto.ItemNoteCreateDto;
+import ru.practicum.note.dto.ItemNoteDto;
 
 import java.util.List;
 
@@ -8,11 +10,11 @@ import java.util.List;
 interface ItemNoteService {
 
     @Transactional
-    ItemNote addNewItemNote(long userId, ItemNote itemNote);
+    ItemNoteDto addNewItemNote(long userId, ItemNoteCreateDto itemNoteCreateDto);
 
-    List<ItemNote> searchNotesByUrl(String url, Long userId);
+    List<ItemNoteDto> searchNotesByUrl(String url, Long userId);
 
-    List<ItemNote> searchNotesByTag(long userId, String tag);
+    List<ItemNoteDto> searchNotesByTag(long userId, String tag);
 
-    List<ItemNote> listAllItemsWithNotes(long userId, int from, int size);
+    List<ItemNoteDto> listAllItemsWithNotes(long userId, int from, int size);
 }
