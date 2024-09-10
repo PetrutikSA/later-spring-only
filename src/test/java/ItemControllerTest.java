@@ -17,7 +17,6 @@ import ru.practicum.item.dto.ItemUpdateDto;
 import ru.practicum.item.dto.mapper.ItemMapper;
 import ru.practicum.item.dto.mapper.ItemMapperImpl;
 import ru.practicum.item.model.Item;
-import ru.practicum.user.dto.UserCreateDto;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
