@@ -27,7 +27,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 @Transactional
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
-@TestPropertySource(locations = "classpath:test-application.properties")
+@TestPropertySource(locations = "classpath:application.properties")
 @SpringJUnitConfig({AppConfig.class, PersistenceConfig.class, UserMapperImpl.class, UserServiceImpl.class})
 public class UserServiceImplTests {
     private final EntityManager em;
